@@ -52,8 +52,8 @@ gif-converter-pro/
 │   │   ├── ModeCard.vue            # 轉換模式卡片
 │   │   └── SettingsPanel.vue       # 品質設定面板
 │   ├── composables/       # 組合式函數
-│   │   ├── useGif.ts              # GIF 生成邏輯
-│   │   └── useGifGenerator.ts     # GIF 生成器（備用）
+│   │   └── useGif.ts              # GIF 生成邏輯(CDN/本地 worker)
+│   │   
 │   ├── App.vue           # 主應用組件
 │   └── main.ts           # 應用入口點
 ├── index.html            # HTML 模板

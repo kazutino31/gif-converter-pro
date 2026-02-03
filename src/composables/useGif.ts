@@ -22,10 +22,15 @@ const generateGif = async (imgElement: HTMLImageElement, options: { quality: num
     originalImage.value = imgElement; // 保存原始圖片
 
     try {
-      // 載入 Worker
-      const response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
-      if (!response.ok) console.log(`Worker 載入失敗: ${response.status}`);
-      
+      // 載入 Worker，先嘗試 CDN，失敗則 fallback 本地
+      let response: Response;
+      try {
+        response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
+        if (!response.ok) throw new Error('CDN worker 載入失敗');
+      } catch {
+        response = await fetch('/gif.worker.js');
+        if (!response.ok) throw new Error('本地 worker 載入失敗');
+      }
       const workerBlob = await response.blob();
       const workerUrl = URL.createObjectURL(workerBlob);
 
