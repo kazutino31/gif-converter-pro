@@ -1,4 +1,5 @@
 import { ref, reactive } from 'vue'
+import { toast } from 'vue-sonner'
 
 // 宣告 gif.js 的型別
 declare const GIF: any;
@@ -23,7 +24,7 @@ const generateGif = async (imgElement: HTMLImageElement, options: { quality: num
     try {
       // 載入 Worker
       const response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js');
-      if (!response.ok) throw new Error(`Worker 載入失敗: ${response.status}`);
+      if (!response.ok) console.log(`Worker 載入失敗: ${response.status}`);
       
       const workerBlob = await response.blob();
       const workerUrl = URL.createObjectURL(workerBlob);
@@ -55,12 +56,12 @@ const generateGif = async (imgElement: HTMLImageElement, options: { quality: num
         state.gifSize = blob.size;
         isProcessing.value = false;
         URL.revokeObjectURL(workerUrl);
+        toast.success('GIF 轉換完成！');
       });
 
       gif.render();
     } catch (error) {
-      console.error('GIF產生錯誤:', error);
-      alert(`發生錯誤: ${error}`);
+      toast.error(`發生錯誤: ${error}`);
       isProcessing.value = false;
     }
   };

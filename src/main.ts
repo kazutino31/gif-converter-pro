@@ -1,6 +1,8 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
+import { Toaster } from 'vue-sonner';
 import App from './App.vue';
+import 'vue-sonner/style.css';
 import './assets/style.css';
 
 const messages = {
@@ -99,4 +101,5 @@ const i18n = createI18n({
 
 const app = createApp(App);
 app.use(i18n);
+app.component('Toaster', Toaster);
 app.mount('#app');

@@ -2,6 +2,7 @@
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useGif } from './composables/useGif';
+import { toast } from 'vue-sonner'
 import LangSelector from './components/LangSelector.vue';
 import ModeCard from './components/ModeCard.vue';
 import SettingsPanel from './components/SettingsPanel.vue';
@@ -22,7 +23,7 @@ const SUPPORTED_FORMATS = /image\/(png|jpe?g)/;
 const handleFileSelect = (file: File) => {
   // 驗證檔案類型
   if (!file?.type?.match(SUPPORTED_FORMATS)) {
-    alert(t('error_file_type'));
+    toast.error(t('error_file_type'));
     return;
   }
 
@@ -43,7 +44,7 @@ const handleFileSelect = (file: File) => {
 const handleReconvert = () => {
   // 使用保存的原始圖片重新轉換
   if (!originalImage.value) {
-    console.warn('沒有原始圖片可以重新轉換');
+    console.log('沒有原始圖片可以重新轉換');
     return;
   }
   generateGif(originalImage.value, { quality: quality.value, mode: selectedMode.value });
@@ -129,6 +130,7 @@ const download = () => {
 
     </div>
   </div>
+  <Toaster position="top-center" :close-button="true" closeButtonPosition="top-right" richColors />
 </template>
 
 <style scoped></style>
