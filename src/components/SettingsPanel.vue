@@ -70,8 +70,8 @@ const handleKeydown = (e: KeyboardEvent) => {
           aria-label="GIF quality control"
         >
         <div class="quality-hints">
-          <span>{{ t('quality_low') }}</span>
           <span>{{ t('quality_high') }}</span>
+          <span>{{ t('quality_low') }}</span>
         </div>
       </div>
     </div>
