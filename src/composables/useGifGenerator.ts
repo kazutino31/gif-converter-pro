@@ -24,7 +24,7 @@ export function useGifGenerator() {
             img.onload = async () => {
               try {
                 // 載入 Worker
-                const response = await fetch('https://cdnjs.cloudflare.com/ajax/libs/gif.js/0.2.0/gif.worker.js')
+                const response = await fetch('/gif.worker.js')
                 if (!response.ok) throw new Error(`Worker 載入失敗: ${response.status}`)
                 
                 const workerBlob = await response.blob()
