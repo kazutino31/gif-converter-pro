@@ -52,7 +52,7 @@ header {
 
 .language-selector {
   position: absolute;
-  top: 0;
+  top: -45px;
   right: 0;
 }
 
@@ -80,7 +80,6 @@ header {
 /* Small screens */
 @media (max-width: 590px) {
   .language-selector {
-      top: -45px;
       right: 8px;
       z-index: 90;
   }
