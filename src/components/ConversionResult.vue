@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 interface Props {
@@ -7,9 +8,11 @@ interface Props {
   gifSize: number;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 const emit = defineEmits(['reset', 'reconvert', 'download']);
 const { t } = useI18n();
+
+const downloadFormat = ref<'gif' | 'webp' | 'png'>('gif');
 
 const formatFileSize = (bytes: number) => {
   if (bytes === 0) return '0 B';
@@ -17,6 +20,17 @@ const formatFileSize = (bytes: number) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + ['B', 'KB', 'MB', 'GB'][i];
 };
+
+const compressionRatio = computed(() => {
+  if (props.originalSize === 0) return '0';
+  const ratio = ((props.originalSize - props.gifSize) / props.originalSize) * 100;
+  return ratio.toFixed(1);
+});
+
+const sizeChange = computed(() => {
+  const diff = props.gifSize - props.originalSize;
+  return diff > 0 ? '+' + formatFileSize(diff) : formatFileSize(Math.abs(diff));
+});
 </script>
 
 <template>
@@ -39,6 +53,22 @@ const formatFileSize = (bytes: number) => {
         <span data-i18n="gif_size">{{ t('gif_size') }}</span>:
         <span class="file-info-value" id="gifSize">{{ formatFileSize(gifSize) }}</span>
       </div>
+      
+      <!-- Compression Stats -->
+      <div class="compression-stats">
+        <div class="stat-item">
+          <span class="stat-label">{{ t('compression_ratio') }}</span>
+          <span class="stat-value" :class="{ 'stat-positive': parseFloat(compressionRatio) > 0, 'stat-negative': parseFloat(compressionRatio) < 0 }">
+            {{ compressionRatio }}%
+          </span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">{{ t('size_change') }}</span>
+          <span class="stat-value" :class="{ 'stat-positive': gifSize < originalSize, 'stat-negative': gifSize > originalSize }">
+            {{ sizeChange }}
+          </span>
+        </div>
+      </div>
     </div>
 
     <div class="preview-box">
@@ -54,7 +84,19 @@ const formatFileSize = (bytes: number) => {
         <span class="material-icons">autorenew</span>
         <span data-i18n="btn_reconvert">{{ t('btn_reconvert') }}</span>
       </button>
-      <button class="btn btn-primary" id="downloadBtn" @click="emit('download')">
+    </div>
+
+    <!-- Download Section with Format Selection -->
+    <div class="download-section">
+      <div class="format-selector">
+        <label>{{ t('download_format') }}</label>
+        <select v-model="downloadFormat" class="format-select">
+          <option value="gif">GIF</option>
+          <option value="webp">WebP</option>
+          <option value="png">PNG</option>
+        </select>
+      </div>
+      <button class="btn btn-primary btn-download-full" id="downloadBtn" @click="emit('download', downloadFormat)">
         <span class="material-icons">download</span>
         <span data-i18n="btn_download">{{ t('btn_download') }}</span>
       </button>
@@ -62,4 +104,44 @@ const formatFileSize = (bytes: number) => {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.download-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.format-selector {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.format-selector label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.format-select {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  background: white;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.format-select:focus {
+  border-color: var(--primary-color);
+}
+
+.btn-download-full {
+  width: 100%;
+  justify-content: center;
+}
+</style>

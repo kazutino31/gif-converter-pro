@@ -46,7 +46,7 @@ const handleKeydown = (e: KeyboardEvent) => {
       data-accordion-target="qualityPanel"
     >
       <span>
-        <span class="material-icons" style="font-size:1.1em; vertical-align:middle;">tune</span>
+        <span class="material-icons" style="font-size:1.1rem; vertical-align:middle;">tune</span>
         <span> {{ t('accordion_quality') }}</span>
       </span>
       <span class="accordion-chevron material-icons">chevron_right</span>
@@ -56,7 +56,7 @@ const handleKeydown = (e: KeyboardEvent) => {
       <div class="quality-control">
         <div class="quality-header">
           <div class="quality-label">
-            <span class="material-icons" style="font-size: 1.2em;">tune</span>
+            <span class="material-icons" style="font-size: 1.2rem;">tune</span>
             <span>{{ t('quality_label') }}</span>
           </div>
           <div class="quality-value">{{ currentLevel }}</div>

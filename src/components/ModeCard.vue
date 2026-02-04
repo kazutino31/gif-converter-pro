@@ -24,7 +24,7 @@ defineEmits(['update:modelValue']);
       :aria-checked="modelValue === mode"
     >
     <span class="option-title">
-      <span class="material-icons" style="font-size: 1.2em; vertical-align: bottom;">{{ icon }}</span> {{ title }}
+      <span class="material-icons" style="font-size: 1.2rem; vertical-align: bottom;">{{ icon }}</span> {{ title }}
     </span>
     <span class="option-desc">{{ description }}</span>
     <span class="material-icons check-icon" aria-hidden="true">check_circle</span>
