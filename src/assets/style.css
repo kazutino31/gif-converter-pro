@@ -1,4 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
+  /* 主色系 - 對應 colors.ts */
   --color-snow: #f2f2e9;
   --color-ice: #dce8f4;
   --color-mist: #a9b8c0;
@@ -6,20 +11,65 @@
   --color-sky: #7082a6;
   --color-deep: #485767;
 
+  /* 背景漸層 */
   --bg-gradient-start: #eef2f6;
   --bg-gradient-end: #dbe4ef;
 
+  /* 主要顏色系統 */
   --primary-color: var(--color-sky);
   --primary-hover: var(--color-deep);
   --text-main: var(--color-deep);
   --text-muted: var(--color-bark);
+  --text-secondary: var(--color-bark);
 
+  /* 面板與邊框 */
   --panel-bg: #ffffff;
   --border-color: #cbd5e1;
 
+  /* 邊框顏色變體 */
+  --border-light: #edeff2;
+  --border-medium: #e2e8f0;
+  --border-dark: #cbd5e1;
+
+  /* 背景色 */
+  --bg-light: #fcfcfc;
+  --bg-lighter: #f8fafc;
+  --bg-blue: #f0f7ff;
+  --bg-blue-lighter: #e6f2ff;
+  --bg-dark: #f8fafc;
+
+  /* 灰階 */
+  --gray-50: #f8fafc;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-400: #9ca3af;
+  --gray-500: #6b7280;
+
+  /* 狀態顏色 */
+  --success: #10b981;
+  --success-light: #f0fdf4;
+  --error: #ef4444;
+  --error-dark: #e74c3c;
+  --error-darker: #dc2626;
+  --warning: #f59e0b;
+  --info: #3b82f6;
+
+  /* 間距 */
   --radius-lg: 24px;
   --radius-md: 12px;
   --radius-sm: 8px;
+  
+  /* 新色系 */
+  --color-primary: #223A53;      /* 深夜藍 */
+  --color-primary-light: #5A6B8C; /* 霧藍 */
+  --color-primary-lighter: #8EC3C7; /* 淡青藍 */
+  --color-secondary: #F6CFC3;    /* 柔粉紅 */
+  --color-accent: #F6E3C3;       /* 柔和米黃 */
+  
+  /* 其他常用顏色 */
+  --white: #ffffff;
+  --black: #000000;
 }
 
 * {
@@ -60,7 +110,7 @@ header {
   padding: 8px 12px;
   border: 1px solid var(--border-color);
   border-radius: 6px;
-  background: white;
+  background: var(--white);
   color: var(--text-main);
   font-size: 0.85rem;
   cursor: pointer;
@@ -80,7 +130,7 @@ header {
 /* Small screens */
 @media (max-width: 590px) {
   .language-selector {
-      right: 8px;
+      right: 13%;
       z-index: 90;
   }
 }
@@ -133,8 +183,8 @@ h1 {
 }
 
 .option-card {
-  background: #fcfcfc;
-  border: 2px solid #edeff2;
+  background: var(--bg-light);
+  border: 2px solid var(--border-light);
   border-radius: var(--radius-md);
   padding: 20px 15px;
   cursor: pointer;
@@ -150,7 +200,7 @@ h1 {
 
 .option-card.active {
   border-color: var(--color-sky);
-  background: #f0f7ff;
+  background: var(--bg-blue);
 }
 
 .option-card input {
@@ -193,8 +243,8 @@ h1 {
 .quality-control {
   margin-bottom: 30px;
   padding: 20px;
-  background: #fcfcfc;
-  border: 2px solid #edeff2;
+  background: var(--bg-light);
+  border: 2px solid var(--border-light);
   border-radius: var(--radius-md);
 }
 
@@ -239,7 +289,7 @@ h1 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: white;
+  background: var(--white);
   cursor: pointer;
   border: 3px solid var(--color-sky);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -255,7 +305,7 @@ h1 {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: white;
+  background: var(--white);
   cursor: pointer;
   border: 3px solid var(--color-sky);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -276,13 +326,13 @@ h1 {
 }
 
 .upload-area {
-  border: 2px dashed #d1d5db;
+  border: 2px dashed var(--gray-300);
   border-radius: var(--radius-md);
   padding: 50px 30px;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, #fcfcfc 0%, #f8fafc 100%);
+  background: linear-gradient(135deg, var(--bg-light) 0%, var(--gray-50) 100%);
   position: relative;
   overflow: hidden;
 }
@@ -306,7 +356,7 @@ h1 {
 .upload-area:hover,
 .upload-area.dragover {
   border-color: var(--color-sky);
-  background: linear-gradient(135deg, #f0f7ff 0%, #e6f2ff 100%);
+  background: linear-gradient(135deg, var(--bg-blue) 0%, var(--bg-blue-lighter) 100%);
   transform: translateY(-2px);
   box-shadow: 0 8px 16px -4px rgba(112, 130, 166, 0.15);
 }
@@ -367,7 +417,7 @@ h1 {
   align-items: center;
   gap: 8px;
   padding: 10px 20px;
-  background: white;
+  background: var(--white);
   border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   color: var(--color-sky);
@@ -380,7 +430,7 @@ h1 {
 .upload-area:hover .upload-custom-btn {
   border-color: var(--color-sky);
   background: var(--color-sky);
-  color: white;
+  color: var(--white);
   box-shadow: 0 4px 8px rgba(112, 130, 166, 0.2);
 }
 
@@ -393,9 +443,9 @@ h1 {
 .accordion-item {
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #eef3f8;
+  border: 1px solid var(--border-light);
   margin-bottom: 12px;
-  background: #ffffff;
+  background: var(--white);
 }
 
 .accordion-header {
@@ -421,8 +471,8 @@ h1 {
 .accordion-panel {
   padding: 16px;
   /* display: none; Managed by Vue */
-  border-top: 1px solid #f1f5f9;
-  background: #fbfdff;
+  border-top: 1px solid var(--gray-100);
+  background: var(--bg-blue);
 }
 
 .accordion-header .accordion-chevron {
@@ -445,7 +495,7 @@ h1 {
   width: 50px;
   height: 50px;
   margin: 0 auto 24px;
-  border: 3px solid #e2e8f0;
+  border: 3px solid var(--border-medium);
   border-top-color: var(--color-sky);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -466,6 +516,65 @@ h1 {
 .progress-detail {
   font-size: 0.85rem;
   color: var(--color-bark);
+}
+
+/* Progress Bar Styles */
+.progress-bar-container {
+  width: 100%;
+  max-width: 400px;
+  height: 32px;
+  margin: 20px auto 0;
+  background: var(--gray-200);
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-sky), var(--primary-color));
+  border-radius: 16px;
+  transition: width 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.progress-percentage {
+  position: relative;
+  z-index: 1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--white);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .result-area {
@@ -521,7 +630,7 @@ h1 {
 }
 
 .file-info-item .material-icons {
-  font-size: 1.2em;
+  font-size: 1.2rem;
   color: var(--color-sky);
 }
 
@@ -530,17 +639,53 @@ h1 {
   color: var(--color-sky);
 }
 
+.compression-stats {
+  width: 100%;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(112, 130, 166, 0.15);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stat-value {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.stat-positive {
+  color: #10b981;
+}
+
+.stat-negative {
+  color: #ef4444;
+}
+
 .preview-box {
-  background: #f8fafc;
+  background: var(--gray-50);
   border-radius: var(--radius-sm);
   padding: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 250px;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-medium);
   margin-bottom: 30px;
-  background-image: linear-gradient(45deg, #eee 25%, transparent 25%), linear-gradient(-45deg, #eee 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #eee 75%), linear-gradient(-45deg, transparent 75%, #eee 75%);
+  background-image: linear-gradient(45deg, var(--checkerboard) 25%, transparent 25%), linear-gradient(-45deg, var(--checkerboard) 25%, transparent 25%), linear-gradient(45deg, transparent 75%, var(--checkerboard) 75%), linear-gradient(-45deg, transparent 75%, var(--checkerboard) 75%);
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }
@@ -575,7 +720,7 @@ h1 {
 
 .btn-primary {
   background: var(--color-sky);
-  color: white;
+  color: var(--white);
   box-shadow: 0 4px 6px -1px rgba(112, 130, 166, 0.4);
 }
 
@@ -586,18 +731,18 @@ h1 {
 }
 
 .btn-secondary {
-  background: #fff;
+  background: var(--white);
   color: var(--color-bark);
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border-medium);
 }
 
 .btn-secondary:hover {
-  background: #f8fafc;
+  background: var(--gray-50);
   color: var(--color-deep);
-  border-color: #cbd5e1;
+  border-color: var(--border-color);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
   .options-grid {
       grid-template-columns: 1fr;
   }
@@ -610,3 +755,93 @@ h1 {
       padding: 30px 20px;
   }
 }
+
+/* Form Elements */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.form-input,
+.form-select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 0.2s;
+  width: 100%;
+  box-sizing: border-box;
+  background: var(--white);
+  color: var(--text-main);
+}
+
+.form-input:focus,
+.form-select:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(112, 130, 166, 0.1);
+}
+
+/* Range Input */
+.form-range {
+  width: 100%;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--color-ice);
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 10px 0;
+}
+
+.form-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.form-range::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.form-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  cursor: pointer;
+  border: 3px solid var(--primary-color);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  transition: transform 0.2s;
+}
+
+.form-range::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Color Input */
+.form-color {
+  width: 60px;
+  height: 40px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  padding: 2px;
+  background: var(--white);
+}
+
